@@ -1,0 +1,78 @@
+
+	<h1>Topics</h1>
+	<p>{{ greeting }}</p>
+
+	<table class="table table-bordered">
+	  <thead>
+		<tr ng-repeat="topic in topics">
+		    <td>	    
+			    <a ng-model="topicTitle" ui-sref="messages({topicId:topic.id, topicName:topic.title})">{{topic.title}}</a> 
+				<div ui-view></div>
+			</td>
+			<td> 	
+				<button name ="editTopic" class="btn btn-primary" ng-click="openModal(topic.id, topic.title)">
+					<i class="fa fa-cog"></i> Edit topic
+				</button> 
+			</td>
+			<td>			  
+				<button type="button" name="deleteTopic" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="openModalDelete(topic.id)">Delete</button> 
+			</td>
+		</tr>
+	  </thead>
+	</table>
+
+	<button name ="newTopic" class="btn btn-primary" data-toggle="modal" ng-click="openModal()">Add topic</button> 
+
+	<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        	<span aria-hidden="true">&times;</span>
+	        </button>
+	        <h4 class="modal-title">{{modalTitle}}</h4>
+		   </div>
+		      <div class="modal-body">			   
+			   <div class="row"> 
+		           <div class="col-xs-9 col-md-12">		      	
+		      	    <form>
+					  <div class="form-group">
+					    <label for="topicText">Topic:</label>
+					    <input type="text" class="form-control" id="topicText" name="topicText" minlength="1" maxlength="100" ng-model="topicModel"></input>
+					    <span class="help-block">Enter topic title, max. 100 characters.</span>
+					   </div>
+					</form>
+		      	   </div>	
+		        </div>
+	           </div> 
+	       <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" ng-click="createOrEditTopic(modalID)">Save</button> 
+	        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="manageCancel()">Cancel</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<div id="myModalDeleteConfirm" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
+	  <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	         	<span aria-hidden="true">&times;</span>
+	         </button>
+	         <h4 class="modal-title">Delete?</h4>
+		   </div> <!-- header -->
+		      <div class="modal-body">				
+			   <div class="row"> 
+		         <div class="col-xs-4 col-md-5">		      	
+		      	  <p>Are you sure?</p>  
+		      	</div>	
+		      </div>		 
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" ng-click="deleteTopic(modalIDforDelete)">OK</button> 
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->

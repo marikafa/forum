@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- mobile first, bootstrap -->
+ <title>Javaritari forum</title>
+    <link rel="stylesheet" href="/css/dev.css">
+</head>
+<body>
+<div class="app">
+	<h1><i class="fa fa-cog"></i>Marika´s forum</h1>
+	
+	<div>
+	 <ul class="nav nav-pills nav-stacked">
+		<li role="presentation" ui-sref-active="active"><a ui-sref="home">Home</a></li>
+		<li role="presentation" ui-sref-active="active"><a ui-sref="topics">Forum</a></li>
+	 </ul>		
+	</div>
+	<div ui-view class="container-fluid"></div> <!-- content will be fetched here,  full-width layout, bootstrap -->
+</div>
+</body>
+</html>

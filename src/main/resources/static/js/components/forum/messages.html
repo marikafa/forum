@@ -1,0 +1,91 @@
+<h1>Messages</h1>
+
+<div class="row">      
+  <div class="col-xs-3 col-md-3">
+    <div class="input-group">
+      <input type="text" id="searchText" class="form-control" ng-model="searchTextModel" placeholder="Search..."></input>
+    </div>  
+  </div> 
+</div>
+
+<table class="table table-bordered">
+  <thead>
+	<tr ng-repeat="message in messages | filter:searchTextModel">	  
+		<td>			
+			<p>{{message.content}}</p>	
+			<p>
+				<i>
+					<font color="gray">Posted on: {{message.createTime.dayOfMonth}} {{message.createTime.month}} {{message.createTime.year}} at {{message.createTime.hour}}:{{message.createTime.minute}}:{{message.createTime.second}}
+					</font>
+				</i>
+			</p> 
+			<div ui-view></div> 
+		</td>
+		<td>
+			<button name="editMessage" class="btn btn-primary" ng-click="openModal(message.id, message.content)">
+				<i class="fa fa-cog"></i> Edit
+			</button>
+		</td>
+		<td>
+			<button name="deleteMessage" class="btn btn-danger" ng-click="openModalDelete(message.id)">Delete</button>	
+		</td>
+	</tr>
+  </thead>
+</table>
+
+<button name ="newMessage" class="btn btn-primary" data-toggle="modal" ng-click="openModal()">Add message</button> 
+
+<!-- template for add and edit topic -->
+	<div id="myModalForMessage" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        	<span aria-hidden="true">&times;</span>
+	        </button>
+	        <h4 class="modal-title">{{modalTitle}}</h4>
+	      </div>
+	      <div class="modal-body">
+	       <div class="row">
+	      	<div class="col-xs-9 col-md-12"> 
+	      		<form>
+				  <div class="form-group">
+				    <label for="messageText">Message:</label>
+				    <input type="text" class="form-control" id="messageText" name="messageText" minlength="1" maxlength="1000" ng-model="messageModel"></input>
+				    <span class="help-block">Enter message, max. 1000 characters.</span>
+				  </div>
+	      	</div>	
+	      </div>
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" ng-click="createOrEditMessage(modalID)">Save</button> 
+	        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="manageCancel()">Cancel</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div id="myModalDeleteConfirm" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
+	  <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	         	<span aria-hidden="true">&times;</span>
+	         </button>
+	         <h4 class="modal-title">Delete?</h4>
+		   </div> 
+		      <div class="modal-body">				
+			   <div class="row"> 
+		         <div class="col-xs-4 col-md-5">		      	
+		      	  <p>Are you sure?</p>  
+		      	</div>	
+		      </div>		 
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" ng-click="deleteMessage(modalIDforDelete)">OK</button> 
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>

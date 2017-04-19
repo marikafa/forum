@@ -1,0 +1,49 @@
+##########################################################################
+# DEFAULT/DEVELOPMENT PROPERTIES:
+# 
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# and docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
+#
+
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./db/ht-db;MODE=PostgreSQL
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+   
+logging:
+  level:
+    logging.level.org.springframework=DEBUG
+
+---
+
+##########################################################################
+# PRODUCTION PROPERTIES:
+#
+# Used when starting the application with command 
+# java -jar whatever-<version>.jar --spring.profiles.active=production
+#
+
+digester:
+  environment: Production
+
+spring:
+  profiles: production
+  datasource:
+    url: 
+    username: 
+    password: 
+
+server:
+  port: 8181
+
+    
